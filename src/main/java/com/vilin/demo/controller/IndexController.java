@@ -3,6 +3,8 @@ package com.vilin.demo.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +15,8 @@ import com.vilin.demo.bean.UserInfo;
 @RestController
 @RequestMapping("/index")
 public class IndexController {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
 
 	@Value(value="${vilin.secret}")
 	private String value;
@@ -20,8 +24,9 @@ public class IndexController {
 	@Value(value="${vilin.address}")
 	private String address;
 	
-	@RequestMapping("/test")
+	@RequestMapping("test")
 	public String index() {
+		LOG.info("使用log4j2打印日志");
 		return "hello spring boot";
 	}
 	
