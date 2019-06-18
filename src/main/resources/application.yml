@@ -1,0 +1,7 @@
+server:
+  port: 8090
+vilin:
+  address: http://www.${vilin.name}.com
+  name: engineer_luo
+  number: ${random.int}
+  secret: ${random.value}
