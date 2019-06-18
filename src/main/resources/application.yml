@@ -5,3 +5,24 @@ vilin:
   name: engineer_luo
   number: ${random.int}
   secret: ${random.value}
+
+spring:
+  profiles:
+    active: test
+    
+#配置多环境
+---
+spring:
+  profiles: test
+server:
+  port: 8091
+vilin:
+  name: engineer1_luo
+  
+---
+spring:
+  profiles: dev
+server:
+  port: 8092
+vilin:
+  name: engineer2_luo
