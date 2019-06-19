@@ -14,7 +14,7 @@ import com.vilin.demo.bean.Student;
 public class StudentController {
 
 	@RequestMapping("show")
-	public String show(Model model) {
+	public String show(Model model) throws Exception {
 		model.addAttribute("str","hello spring boot freemarker");
 		Student student = new Student();
 		student.setId(10001);
@@ -29,6 +29,8 @@ public class StudentController {
 			list.add(stu);
 		}
 		model.addAttribute("students", list);
+		if(!"a".equals(""))
+		    throw new RuntimeException("运行时异常");
 		return "student";
 	}
 }
