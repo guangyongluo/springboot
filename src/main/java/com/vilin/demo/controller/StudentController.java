@@ -29,6 +29,6 @@ public class StudentController {
 			list.add(stu);
 		}
 		model.addAttribute("students", list);
-		return "show";
+		return "student";
 	}
 }

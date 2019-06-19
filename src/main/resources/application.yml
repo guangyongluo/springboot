@@ -11,7 +11,11 @@ spring:
     active: dev
     
 #freemarker配置
-  freemarker:
+#  freemarker:
+#    suffix: .html
+
+  thymeleaf:
+    prefix: classpath:/web/
     suffix: .html
 
  

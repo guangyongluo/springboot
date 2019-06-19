@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>thymeleaf</h3>
+<span th:text="${str}"></span>
+
+<h3>学生信息</h3>
+id:<span th:text="${stu.id}"></span><br>
+name:<span th:text="${stu.name}"></span><br>
+id:<input type="text" name="" th:value="${stu.id}"><br>
+name:<input type="text" name="" th:value="${stu.name}"><br>
+<a href="http://localhost:8080/student/show" th:href="@{http://www.baidu.com?id=(${stu.id})}">链接</a>
+
+<h3>循环</h3>
+<ul>
+  <li th:each="s:${students}" th:text="${s.name}"></li>
+</ul>
+
+<table>
+  <tr th:each="s:${students}">
+    <td th:text="${s.id}"></td>
+    <td th:text="${s.name}"></td>
+  </tr>
+</table>
+
+<h3>下拉菜单</h3>
+<select>
+  <option th:each="s:${students}" th:value="${s.id}" th:text="${s.name}" th:selected="${s.id==2}"></option>
+</select>
+
+<h3>图像</h3>
+<img src="xxx" th:src="${stu.name}">
+</body>
+</html>
