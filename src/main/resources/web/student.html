@@ -34,5 +34,13 @@ name:<input type="text" name="" th:value="${stu.name}"><br>
 
 <h3>图像</h3>
 <img src="xxx" th:src="${stu.name}">
+
+<h3>文件上传</h3>
+<form method="post" enctype="multipart/form-data" action="/file/upload">
+  文件:<input type="file" name="lwfile"><br>
+  <button type="submit">上传文件</button>
+</form>
+
+<a href="/file/download">下载</a>
 </body>
 </html>

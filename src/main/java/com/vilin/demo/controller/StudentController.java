@@ -29,8 +29,8 @@ public class StudentController {
 			list.add(stu);
 		}
 		model.addAttribute("students", list);
-		if(!"a".equals(""))
-		    throw new RuntimeException("运行时异常");
+//		if(!"a".equals(""))
+//		    throw new RuntimeException("运行时异常");
 		return "student";
 	}
 }
