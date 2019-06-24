@@ -1,5 +1,7 @@
 package com.vilin.demo;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.vilin.demo.bean.UserInfo;
 import com.vilin.demo.dao.UserInfoDao;
+import com.vilin.demo.dao.util.Page;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -70,5 +73,20 @@ public class SpringbootApplicationTests {
 		userInfo.setId(1);
 		int num = userInfoDao.deleteUserInfo(userInfo);
 		System.out.println("num = " + num);
+	}
+	
+	@Test
+	public void queryPageTest() {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setName("张三");
+		Page<UserInfo> page = userInfoDao.queryForPage2(1, 2, userInfo);
+		System.out.println("共有" + page.getTotalCount() + "条记录");
+		System.out.println("当前是第" + page.getPageCurrent() + "页");
+		System.out.println("共有" + page.getTotalPage() + "页");
+		List<UserInfo> users = page.getList();
+		for(UserInfo user : users) {
+			System.out.println("user.id = " + user.getId());
+			System.out.println("user.name = " + user.getName());
+		}
 	}
 }
