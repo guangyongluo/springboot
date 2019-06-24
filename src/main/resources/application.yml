@@ -25,6 +25,12 @@ spring:
     password: Lw@1985105
     driver-class-name: com.mysql.cj.jdbc.Driver
     
+#JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true    
+
 #配置多环境
 ---
 spring:

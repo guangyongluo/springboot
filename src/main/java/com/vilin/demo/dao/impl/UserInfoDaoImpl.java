@@ -12,7 +12,7 @@ import com.vilin.demo.dao.util.AbstractJdbcDao;
 import com.vilin.demo.dao.util.Page;
 
 @Repository
-public class UserInfoImpl extends AbstractJdbcDao implements UserInfoDao {
+public class UserInfoDaoImpl extends AbstractJdbcDao implements UserInfoDao {
 
 	@Autowired
 	private JdbcTemplate template;

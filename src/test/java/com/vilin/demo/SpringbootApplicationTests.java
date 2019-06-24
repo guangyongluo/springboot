@@ -6,11 +6,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.vilin.demo.bean.UserInfo;
 import com.vilin.demo.dao.UserInfoDao;
 import com.vilin.demo.dao.util.Page;
+import com.vilin.demo.jpa.dao.UserInfoJpaDao;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -36,6 +39,9 @@ public class SpringbootApplicationTests {
 	
 	@Autowired
 	private UserInfoDao userInfoDao;
+	
+	@Autowired
+	private UserInfoJpaDao userInfoJpaDao;
 	
 	@Test
     public void contextLoads() {
@@ -87,6 +93,80 @@ public class SpringbootApplicationTests {
 		for(UserInfo user : users) {
 			System.out.println("user.id = " + user.getId());
 			System.out.println("user.name = " + user.getName());
+		}
+	}
+	
+	@Test
+	public void insertTest() {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setName("张三");
+		userInfo.setSex("男");
+		userInfoJpaDao.save(userInfo);
+	}
+	
+	@Test
+	public void updateTest() {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setId(1);
+		userInfo.setName("李四");
+		userInfo.setSex("女");
+		userInfoJpaDao.save(userInfo);
+	}
+	
+	@Test
+	public void deleteTest() {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setId(1);
+		userInfoJpaDao.delete(userInfo);
+	}
+	
+	@Test
+	public void queryTest() {
+		List<UserInfo> list = userInfoJpaDao.findByName("张三");
+		for(UserInfo userInfo : list) {
+			System.out.println("userInfo.id = " + userInfo.getId() + " userInfo.name = " + userInfo.getName() + " userInfo.sex = " + userInfo.getSex());
+		}
+	}
+	
+	@Test
+	public void queryTest0() {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setId(3);
+		userInfo = userInfoJpaDao.getOne(userInfo.getId());
+		System.out.println(userInfo.getSex());
+	}
+	
+	@Test
+	public void queryTest1() {
+		List<UserInfo> list = userInfoJpaDao.findByName("%三%");
+		for(UserInfo userInfo : list) {
+			System.out.println("userInfo.id = " + userInfo.getId() + " userInfo.name = " + userInfo.getName() + " userInfo.sex = " + userInfo.getSex());
+		}
+	}
+	
+	@Test
+	public void queryTest2() {
+		List<UserInfo> list = userInfoJpaDao.findByNameAndSex("张三", "男");
+		for(UserInfo userInfo : list) {
+			System.out.println("userInfo.id = " + userInfo.getId() + " userInfo.name = " + userInfo.getName() + " userInfo.sex = " + userInfo.getSex());
+		}
+	}
+	
+	@Test
+	public void queryTest3() {
+		List<UserInfo> list = userInfoJpaDao.findByNameLike("%张%");
+		for(UserInfo userInfo : list) {
+			System.out.println("userInfo.id = " + userInfo.getId() + " userInfo.name = " + userInfo.getName() + " userInfo.sex = " + userInfo.getSex());
+		}
+	}
+	
+	@Test
+	public void queryTest4() {
+		Pageable pageable = PageRequest.of(0, 2);
+		org.springframework.data.domain.Page<UserInfo> page = userInfoJpaDao.findByNameLike("%张%", pageable);
+		
+		for(UserInfo userInfo : page.getContent()) {
+			System.out.println("userInfo.id = " + userInfo.getId() + " userInfo.name = " + userInfo.getName() + " userInfo.sex = " + userInfo.getSex());
 		}
 	}
 }
