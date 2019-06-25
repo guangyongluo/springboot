@@ -1,6 +1,8 @@
 package com.vilin.demo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +13,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.vilin.demo.bean.UserInfo;
+import com.vilin.demo.component.RedisComponent;
 import com.vilin.demo.dao.UserInfoDao;
 import com.vilin.demo.dao.util.Page;
 import com.vilin.demo.jpa.dao.UserInfoJpaDao;
+
+import redis.clients.jedis.Jedis;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -42,6 +47,13 @@ public class SpringbootApplicationTests {
 	
 	@Autowired
 	private UserInfoJpaDao userInfoJpaDao;
+	
+	@Autowired
+	private RedisComponent redisComponent;
+	
+	private String addr = "127.0.0.1";
+	
+	private int port = 6379;
 	
 	@Test
     public void contextLoads() {
@@ -168,5 +180,38 @@ public class SpringbootApplicationTests {
 		for(UserInfo userInfo : page.getContent()) {
 			System.out.println("userInfo.id = " + userInfo.getId() + " userInfo.name = " + userInfo.getName() + " userInfo.sex = " + userInfo.getSex());
 		}
+	}
+	
+	@Test
+	public void redisTest() {
+		Jedis jedis = new Jedis(addr, port);
+		jedis.set("str", "hello word!");
+		System.out.println(jedis.ping());
+		String value = jedis.get("str");
+		System.out.println("value = " + value);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("a", "1");
+		map.put("b", "2");
+		map.put("c", "3");
+		jedis.hmset("map", map);
+		map = jedis.hgetAll("map");
+		System.out.println(map.get("b"));
+		
+		jedis.lpush("li", "a","b","c");
+		List<String> list = jedis.lrange("li", 0, 100);
+		for(String s : list) {
+			System.out.println(s);
+		}
+	}
+	
+	@Test
+	public void redisSetTest() {
+		redisComponent.set("com", "hello world!!!");
+	}
+	
+	@Test
+	public void redisGetTest() {
+		redisComponent.get("com");
 	}
 }
