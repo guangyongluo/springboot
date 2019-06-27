@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 
 import com.vilin.demo.filter.MyFilter1;
 import com.vilin.demo.filter.MyFilter2;
@@ -19,7 +20,7 @@ import com.vilin.demo.servlet.MyServlet1;
 import com.vilin.demo.servlet.MyServlet2;
 
 
-
+@EnableCaching
 @SpringBootApplication
 @ServletComponentScan
 public class SpringbootApplication {

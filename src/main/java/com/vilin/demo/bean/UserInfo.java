@@ -1,5 +1,7 @@
 package com.vilin.demo.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class UserInfo {
+public class UserInfo implements Serializable{
 
 	private Integer id;
 	

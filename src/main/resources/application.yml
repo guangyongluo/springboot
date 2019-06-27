@@ -35,6 +35,12 @@ spring:
   redis:
     host: localhost
     port: 6379
+    
+#ehcache
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:config/ehcache.xml
 
 #配置多环境
 ---
