@@ -19,5 +19,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public UserInfo findById(Integer id) {
 		return userInfoJpaDao.findOneUserInfo(id);
 	}
+	
+	public void update(UserInfo userInfo) {
+		userInfoJpaDao.save(userInfo);
+	}
 
 }

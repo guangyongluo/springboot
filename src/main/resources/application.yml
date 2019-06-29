@@ -26,21 +26,33 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     
 #JPA
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true    
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true    
 
 #Redis
-  redis:
-    host: localhost
-    port: 6379
+#  redis:
+#    host: localhost
+#    port: 6379
+#    database: 0
+#    timeout: 60s
+#    jedis:
+#      pool:
+#        max-idle: 8
+#        min-idle: 0
+#        max-wait: -1
+#        max-active: 8
     
 #ehcache
-  cache:
-    type: ehcache
-    ehcache:
-      config: classpath:config/ehcache.xml
+#  cache:
+#    type: ehcache
+#    ehcache:
+#      config: classpath:config/ehcache.xml
+
+#redis-cache
+#  cache:
+#    type: redis
 
 #配置多环境
 ---

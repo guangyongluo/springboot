@@ -6,4 +6,5 @@ public interface UserInfoService {
 
 	public UserInfo findById(Integer id);
 	
+	public void update(UserInfo userInfo);
 }

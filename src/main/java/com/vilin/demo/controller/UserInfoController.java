@@ -25,4 +25,14 @@ public class UserInfoController {
 		model.addAttribute("user", userInfo);
 		return "index";
 	}
+	
+	@RequestMapping("update")
+	public String update(String name) {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setId(1);
+		userInfo.setName(name);
+		userInfo.setSex("女");
+		userInfoService.update(userInfo);
+		return "index";
+	}
 }
